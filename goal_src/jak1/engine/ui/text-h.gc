@@ -854,7 +854,7 @@
   (pad-circle #x2001)
   (pad-x #x2002)
   (pad-square #x2003)
-;; GAME-TEXT-ID ENUM ENDS
+  ;; GAME-TEXT-ID ENUM ENDS
   )
 
 ;; DECOMP BEGINS

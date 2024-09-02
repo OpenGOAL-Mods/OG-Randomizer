@@ -28,10 +28,7 @@ jobs:
       metadataAuthors: "zed,barg,MikeGamePro"
       metadataTags: "speedrunning,challenge,gameplay-mod,rng"
       metadataWebsiteUrl: "https://github.com/OpenGOAL-Mods/OG-Randomizer/blob/main/README.md"
-      skipMacOS: true
-      skipLinux: true
-      toolingBinaryDir: "out/build/Release/bin"
+      toolingRepo: "OpenGOAL-Mods/OG-Mod-Base"
       gameAssetsDir: "game/assets"
-      copyEntireBinaryDir: true
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
