@@ -100,6 +100,7 @@
       (new 'static 'continue-point
         :name "training-far"
         :level 'training
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x -4992741.0000 :y 112107.3593 :z 3521065.0000 :w 1.0)
         :quat (new 'static 'quaternion :y -0.5227 :w 0.8525)
         :camera-trans (new 'static 'vector :x -4952588.5000 :y 131398.8750 :z 3502225.2500 :w 1.0)
@@ -239,6 +240,7 @@
       (new 'static 'continue-point
         :name "village1-far"
         :level 'village1
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x -22184.5214 :y 71808.6953 :z -9146.8037 :w 1.0)
         :quat (new 'static 'quaternion :y 0.9387 :w 0.3445)
         :camera-trans (new 'static 'vector :x 13723.9384 :y 91625.5468 :z -38547.2539 :w 1.0)
@@ -296,6 +298,7 @@
         (new 'static 'continue-point
         :name "beach-pelican"
         :level 'beach
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x -707794.0000 :y 45171.0195 :z -1755679.6250 :w 1.0)
         :quat (new 'static 'quaternion :y -0.9820 :w 0.1886)
         :camera-trans (new 'static 'vector :x -731001.3750 :y 66196.4843 :z -1801026.2500 :w 1.0)
@@ -310,6 +313,7 @@
         (new 'static 'continue-point
         :name "beach-far"
         :level 'beach
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x -988223.5000 :y 34618.9492 :z -1674829.7500 :w 1.0)
         :quat (new 'static 'quaternion :y 0.7691 :w 0.6391)
         :camera-trans (new 'static 'vector :x -937688.8750 :y 55687.8085 :z -1667184.6250 :w 1.0)
@@ -367,6 +371,7 @@
         (new 'static 'continue-point
         :name "jungle-far"
         :level 'jungle
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x 1696097.3750 :y 108484.8515 :z -1377842.5000 :w 1.0)
         :quat (new 'static 'quaternion :y 0.1241 :w -0.9922)
         :camera-trans (new 'static 'vector :x 1710405.6250 :y 129562.8828 :z -1426943.2500 :w 1.0)
@@ -1127,6 +1132,7 @@
       (new 'static 'continue-point
         :name "swamp-flutflut"
         :level 'swamp
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x (meters 563.3038) :y (meters 0.6789) :z (meters -2114.5437):w 1.0)
         :quat (new 'static 'quaternion :y -1.6975 :w 0.7165)
         :camera-trans (new 'static 'vector :x 0.0 :y 0.0 :z 0.0 :w 1.0)
@@ -1361,6 +1367,7 @@
       (new 'static 'continue-point
         :name "village3-cart"
         :level 'village3
+        :flags (continue-flags additional)
         :trans (new 'static 'vector :x 4675205.5000 :y 202571.6406 :z -13990358.0000 :w 1.0)
         :quat (new 'static 'quaternion :y 0.1474 :w 0.9890)
         :camera-trans (new 'static 'vector :x 4669675.0000 :y 221362.2187 :z -13948159.0000 :w 1.0)
