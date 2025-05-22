@@ -392,6 +392,7 @@
   )
 
 (defun resetCheckpointRandomizer ()
+  (format 0 "RANDOMIZER: resetCheckpointRandomizer!~%")
   (set! (-> *rando-state* collectable-count) 0)
 
   (when (-> *randomizer-settings* use-random-seed?)

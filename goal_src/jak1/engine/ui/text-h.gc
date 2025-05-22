@@ -730,6 +730,9 @@
   (icelandic                    #x111a)
   (polish                       #x111b)
   (lithuanian                   #x111c)
+  (czech #x111d)
+  (croatian #x111e)
+  (galician #x111f)
   (scene-0                      #x1200)
   (scene-255                    #x12ff)
   (hint-0                       #x1300)
@@ -773,6 +776,7 @@
   (speedrun-hub2-100             #x1522)
   (speedrun-hub3-100             #x1523)
   (speedrun-all-cutscenes        #x1524)
+  (speedrun-new-rando-run        #x15a0)
 
   ;; input options
   (input-options #x1600)
@@ -799,6 +803,7 @@
   (input-opts-binds-unknown #x1615)
   (progress-no-other-resolution-options #x1616)
   (input-opts-controller-led-reflect-heat #x1617)
+  (input-opts-controller-pressure-sensitivity #x1618)
 
   ;; Mod Options
   (mod-options                  #x1700)

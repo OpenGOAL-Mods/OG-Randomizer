@@ -56,7 +56,6 @@
   (none)
   )
 
-
 (defun runs-on-cell-pickup ((cell-event symbol))
   (case cell-event
     (('pickup)

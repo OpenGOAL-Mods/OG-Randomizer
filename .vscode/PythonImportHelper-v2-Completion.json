@@ -964,6 +964,15 @@
         "documentation": {}
     },
     {
+        "label": "pathlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "Path",
         "importPath": "pathlib",
         "description": "pathlib",
@@ -2576,6 +2585,24 @@
         "documentation": {}
     },
     {
+        "label": "multiprocessing",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "multiprocessing",
+        "description": "multiprocessing",
+        "detail": "multiprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "shlex",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shlex",
+        "description": "shlex",
+        "detail": "shlex",
+        "documentation": {}
+    },
+    {
         "label": "errno,",
         "kind": 6,
         "isExtraImport": true,
@@ -3011,15 +3038,6 @@
         "documentation": {}
     },
     {
-        "label": "multiprocessing",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "multiprocessing",
-        "description": "multiprocessing",
-        "detail": "multiprocessing",
-        "documentation": {}
-    },
-    {
         "label": "optparse",
         "kind": 6,
         "isExtraImport": true,
@@ -3262,15 +3280,6 @@
         "documentation": {}
     },
     {
-        "label": "shlex",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "shlex",
-        "description": "shlex",
-        "detail": "shlex",
-        "documentation": {}
-    },
-    {
         "label": "*",
         "importPath": "crash_tool",
         "description": "crash_tool",
@@ -3443,7 +3452,7 @@
         "kind": 2,
         "importPath": "custom_assets.blender_plugins.opengoal",
         "description": "custom_assets.blender_plugins.opengoal",
-        "peekOfCode": "def draw_func_ob(self, context):\n    layout = self.layout\n    ob = context.object\n    layout.prop(ob, \"set_invisible\")\n    layout.prop(ob, \"set_collision\")\n    if (ob.set_collision):\n        layout.prop(ob, \"ignore\")\n        layout.prop(ob, \"collide_mode\")\n        layout.prop(ob, \"collide_material\")\n        layout.prop(ob, \"collide_event\")",
+        "peekOfCode": "def draw_func_ob(self, context):\n    layout = self.layout\n    ob = context.object\n    layout.prop(ob, \"set_invisible\")\n    layout.prop(ob, \"enable_custom_weights\")\n    layout.prop(ob, \"copy_eye_draws\")\n    layout.prop(ob, \"copy_mod_draws\")\n    layout.prop(ob, \"set_collision\")\n    if (ob.set_collision):\n        layout.prop(ob, \"ignore\")",
         "detail": "custom_assets.blender_plugins.opengoal",
         "documentation": {}
     },
@@ -4510,6 +4519,78 @@
         "documentation": {}
     },
     {
+        "label": "masks",
+        "kind": 5,
+        "importPath": "goal_src.replace_code",
+        "description": "goal_src.replace_code",
+        "peekOfCode": "masks = {\n    \"#b0001\": \"x\",\n    \"#b0010\": \"y\",\n    \"#b0100\": \"z\",\n    \"#b1000\": \"w\",\n    \"#b0011\": \"xy\",\n    \"#b0101\": \"xz\",\n    \"#b1001\": \"xw\",\n    \"#b0110\": \"yz\",\n    \"#b1010\": \"yw\",",
+        "detail": "goal_src.replace_code",
+        "documentation": {}
+    },
+    {
+        "label": "relevant_files",
+        "kind": 5,
+        "importPath": "goal_src.replace_code",
+        "description": "goal_src.replace_code",
+        "peekOfCode": "relevant_files = glob.glob(\"./jak3/**/*.gc\", recursive=True)\nmask_regex = re.compile(r\"(:mask #b[0,1]+)\")\nop_regex = re.compile(r\"\\(.*(\\.vf)\\s\")\nfor file in relevant_files:\n    print(file)\n    new_lines = []\n    with open(file, mode=\"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()\n        for line in lines:\n            if \":mask #b\" in line:",
+        "detail": "goal_src.replace_code",
+        "documentation": {}
+    },
+    {
+        "label": "mask_regex",
+        "kind": 5,
+        "importPath": "goal_src.replace_code",
+        "description": "goal_src.replace_code",
+        "peekOfCode": "mask_regex = re.compile(r\"(:mask #b[0,1]+)\")\nop_regex = re.compile(r\"\\(.*(\\.vf)\\s\")\nfor file in relevant_files:\n    print(file)\n    new_lines = []\n    with open(file, mode=\"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()\n        for line in lines:\n            if \":mask #b\" in line:\n                # find the operation name in the line and the mask value",
+        "detail": "goal_src.replace_code",
+        "documentation": {}
+    },
+    {
+        "label": "op_regex",
+        "kind": 5,
+        "importPath": "goal_src.replace_code",
+        "description": "goal_src.replace_code",
+        "peekOfCode": "op_regex = re.compile(r\"\\(.*(\\.vf)\\s\")\nfor file in relevant_files:\n    print(file)\n    new_lines = []\n    with open(file, mode=\"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()\n        for line in lines:\n            if \":mask #b\" in line:\n                # find the operation name in the line and the mask value\n                mask_result = mask_regex.search(line)",
+        "detail": "goal_src.replace_code",
+        "documentation": {}
+    },
+    {
+        "label": "op_names_2arg",
+        "kind": 5,
+        "importPath": "goal_src.temp",
+        "description": "goal_src.temp",
+        "peekOfCode": "op_names_2arg = [\n    \".mov.vf\",\n    \".abs.vf\",\n]\nop_names_3arg = [\n    \".xor.vf\",\n    \".blend.vf\",\n    \".max.vf\",\n    \".max.x.vf\",\n    \".max.y.vf\",",
+        "detail": "goal_src.temp",
+        "documentation": {}
+    },
+    {
+        "label": "op_names_3arg",
+        "kind": 5,
+        "importPath": "goal_src.temp",
+        "description": "goal_src.temp",
+        "peekOfCode": "op_names_3arg = [\n    \".xor.vf\",\n    \".blend.vf\",\n    \".max.vf\",\n    \".max.x.vf\",\n    \".max.y.vf\",\n    \".max.z.vf\",\n    \".max.w.vf\",\n    \".min.vf\",\n    \".min.x.vf\",",
+        "detail": "goal_src.temp",
+        "documentation": {}
+    },
+    {
+        "label": "op_names_4arg",
+        "kind": 5,
+        "importPath": "goal_src.temp",
+        "description": "goal_src.temp",
+        "peekOfCode": "op_names_4arg = [\n    \".add.mul.vf\",\n    \".add.mul.x.vf\",\n    \".add.mul.y.vf\",\n    \".add.mul.z.vf\",\n    \".add.mul.w.vf\",\n    \".sub.mul.vf\",\n    \".sub.mul.x.vf\",\n    \".sub.mul.y.vf\",\n    \".sub.mul.z.vf\",",
+        "detail": "goal_src.temp",
+        "documentation": {}
+    },
+    {
+        "label": "masks",
+        "kind": 5,
+        "importPath": "goal_src.temp",
+        "description": "goal_src.temp",
+        "peekOfCode": "masks = {\n    \"x\": \"#b0001\",\n    \"y\": \"#b0010\",\n    \"z\": \"#b0100\",\n    \"w\": \"#b1000\",\n    \"xy\": \"#b0011\",\n    \"xz\": \"#b0101\",\n    \"xw\": \"#b1001\",\n    \"yz\": \"#b0110\",\n    \"yw\": \"#b1010\",",
+        "detail": "goal_src.temp",
+        "documentation": {}
+    },
+    {
         "label": "get_file_comment",
         "kind": 2,
         "importPath": "scripts.ci.docs.append-file-docs",
@@ -4649,7 +4730,7 @@
         "kind": 5,
         "importPath": "scripts.ci.lint-characters",
         "description": "scripts.ci.lint-characters",
-        "peekOfCode": "args = parser.parse_args()\n# TODO - trim strings\n# fmt: off\nJAK1_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",",
+        "peekOfCode": "args = parser.parse_args()\n# TODO - trim strings\n# fmt: off\nJAK1_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\"Ů\", \"Ý\", \"Č\", \"Ň\", \"Ř\", \"Š\", \"Ť\", \"Ž\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",\"Ǎ\",\"Ě\",\"Ǧ\",\"Ǐ\",\"Ǒ\",\"Ǔ\",\"Y̌\",",
         "detail": "scripts.ci.lint-characters",
         "documentation": {}
     },
@@ -4658,7 +4739,7 @@
         "kind": 5,
         "importPath": "scripts.ci.lint-characters",
         "description": "scripts.ci.lint-characters",
-        "peekOfCode": "JAK1_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",\n    \"海\", \"界\", \"学\", \"ワ\", \"ヲ\", \"ン\", \"岩\", \"旧\", \"空\", \"ヮ\", \"撃\", \"賢\", \"湖\", \"口\", \"行\", \"合\", \"士\", \"寺\", \"山\", \"者\", \"所\", \"書\", \"小\", \"沼\", \"上\", \"城\", \"場\", \"出\", \"闇\", \"遺\", \"黄\", \"屋\", \"下\", \"家\", \"火\", \"花\", \"レ\", \"ロ\", \"青\", \"・\", \"゛\", \"゜\", \"ー\", \"『\", \"』\", \"宝\", \"石\", \"赤\", \"跡\", \"川\", \"戦\", \"村\", \"隊\", \"台\", \"長\", \"鳥\", \"艇\", \"洞\", \"道\", \"発\", \"飛\", \"噴\", \"池\", \"中\", \"塔\", \"島\", \"部\", \"砲\", \"産\", \"眷\", \"力\", \"緑\", \"岸\", \"像\", \"谷\", \"心\", \"森\", \"水\", \"船\", \"世\",\n    \"ぁ\", \"あ\", \"ぃ\", \"い\", \"ぅ\", \"う\", \"ぇ\", \"え\", \"ぉ\", \"お\", \"か\", \"き\", \"く\", \"け\", \"こ\", \"さ\", \"し\", \"す\", \"せ\", \"そ\", \"た\", \"ち\", \"っ\", \"つ\", \"て\", \"と\", \"な\", \"に\", \"ぬ\", \"ね\", \"の\", \"は\", \"ひ\", \"ふ\", \"へ\", \"ほ\", \"ま\", \"み\", \"む\", \"め\", \"も\", \"ゃ\", \"や\", \"ゅ\", \"ゆ\", \"ょ\", \"よ\", \"ら\", \"り\", \"る\", \"れ\", \"ろ\", \"ゎ\", \"わ\", \"を\", \"ん\",\n    \"が\", \"ぎ\", \"ぐ\", \"げ\", \"ご\", \"ざ\", \"じ\", \"ず\", \"ぜ\", \"ぞ\", \"だ\", \"ぢ\", \"づ\", \"で\", \"ど\", \"ば\", \"び\", \"ぶ\", \"べ\", \"ぼ\",",
+        "peekOfCode": "JAK1_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\"Ů\", \"Ý\", \"Č\", \"Ň\", \"Ř\", \"Š\", \"Ť\", \"Ž\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",\"Ǎ\",\"Ě\",\"Ǧ\",\"Ǐ\",\"Ǒ\",\"Ǔ\",\"Y̌\",\n    \"海\", \"界\", \"学\", \"ワ\", \"ヲ\", \"ン\", \"岩\", \"旧\", \"空\", \"ヮ\", \"撃\", \"賢\", \"湖\", \"口\", \"行\", \"合\", \"士\", \"寺\", \"山\", \"者\", \"所\", \"書\", \"小\", \"沼\", \"上\", \"城\", \"場\", \"出\", \"闇\", \"遺\", \"黄\", \"屋\", \"下\", \"家\", \"火\", \"花\", \"レ\", \"ロ\", \"青\", \"・\", \"゛\", \"゜\", \"ー\", \"『\", \"』\", \"宝\", \"石\", \"赤\", \"跡\", \"川\", \"戦\", \"村\", \"隊\", \"台\", \"長\", \"鳥\", \"艇\", \"洞\", \"道\", \"発\", \"飛\", \"噴\", \"池\", \"中\", \"塔\", \"島\", \"部\", \"砲\", \"産\", \"眷\", \"力\", \"緑\", \"岸\", \"像\", \"谷\", \"心\", \"森\", \"水\", \"船\", \"世\",\n    \"ぁ\", \"あ\", \"ぃ\", \"い\", \"ぅ\", \"う\", \"ぇ\", \"え\", \"ぉ\", \"お\", \"か\", \"き\", \"く\", \"け\", \"こ\", \"さ\", \"し\", \"す\", \"せ\", \"そ\", \"た\", \"ち\", \"っ\", \"つ\", \"て\", \"と\", \"な\", \"に\", \"ぬ\", \"ね\", \"の\", \"は\", \"ひ\", \"ふ\", \"へ\", \"ほ\", \"ま\", \"み\", \"む\", \"め\", \"も\", \"ゃ\", \"や\", \"ゅ\", \"ゆ\", \"ょ\", \"よ\", \"ら\", \"り\", \"る\", \"れ\", \"ろ\", \"ゎ\", \"わ\", \"を\", \"ん\",\n    \"が\", \"ぎ\", \"ぐ\", \"げ\", \"ご\", \"ざ\", \"じ\", \"ず\", \"ぜ\", \"ぞ\", \"だ\", \"ぢ\", \"づ\", \"で\", \"ど\", \"ば\", \"び\", \"ぶ\", \"べ\", \"ぼ\",",
         "detail": "scripts.ci.lint-characters",
         "documentation": {}
     },
@@ -4685,7 +4766,7 @@
         "kind": 5,
         "importPath": "scripts.ci.lint-characters",
         "description": "scripts.ci.lint-characters",
-        "peekOfCode": "JAK2_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\", \"k\", \"l\", \"m\", \"n\", \"o\", \"p\", \"q\", \"r\", \"s\", \"t\", \"u\", \"v\", \"w\", \"x\", \"y\", \"z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\n    \"æ\", \"ø\", \"œ\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",\n    \"ñ\", \"á\", \"é\", \"í\", \"ó\", \"ú\", \"â\", \"ê\", \"î\", \"ô\", \"û\", \"à\", \"è\", \"ì\", \"ò\", \"ù\", \"ä\", \"ö\", \"ü\", \"ś\", \"å\", \"õ\", \"ã\", \"ę\", \"ż\", \"ć\", \"ą\", \"ł\", \"ń\", \"ű\", \"ő\", \"ė\",\"č\",\"š\",\"ž\",\"ų\",\"ū\",\"į\",",
+        "peekOfCode": "JAK2_ALLOWED_CHARACTERS = [\n    \"_\", # NOTE - not an actual underscore, adds a long space!\n    \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\", \"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\", \"Y\", \"Z\",\n    \"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\", \"k\", \"l\", \"m\", \"n\", \"o\", \"p\", \"q\", \"r\", \"s\", \"t\", \"u\", \"v\", \"w\", \"x\", \"y\", \"z\",\n    \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\",\n    \"'\", \"!\", \"(\", \")\", \"+\", \"-\", \",\", \".\", \"/\", \":\", \"=\", \"<\", \">\", \"*\", \"%\", \"?\", \"\\\"\",\n    \"`\", \"ˇ\", \"¨\", \"º\", \"¡\", \"¿\", \"Æ\", \"Ç\", \"ß\", \"™\", \"、\", \" \", \"Å\", \"Ø\", \"Ą\", \"Ę\", \"Ł\", \"Ż\",\n    \"Ů\", \"ů\", \"Ý\", \"ý\", \"Č\", \"č\", \"Ň\", \"ň\", \"Ř\", \"ř\", \"Š\", \"š\", \"Ť\", \"ť\", \"Ž\", \"ž\",\n    \"æ\", \"ø\", \"œ\",\n    \"Ñ\", \"Ã\", \"Õ\", \"Á\", \"É\", \"Í\", \"Ó\", \"Ú\", \"Ć\", \"Ń\", \"Ś\", \"Ź\", \"ź\", \"Ő\", \"Ű\", \"Â\", \"Ê\", \"Î\", \"Ô\", \"Û\", \"À\", \"È\", \"Ì\", \"Ò\", \"Ù\", \"Ä\", \"Ë\", \"Ï\", \"ï\", \"Ö\", \"ö\", \"Ü\", \"Ė\",\"Č\",\"Š\",\"Ž\",\"Ų\",\"Ū\",\"Į\",",
         "detail": "scripts.ci.lint-characters",
         "documentation": {}
     },
@@ -8116,6 +8197,285 @@
         "description": "third-party.discord-rpc.build",
         "peekOfCode": "INSTALL_ROOT = os.path.join(SCRIPT_PATH, 'builds', 'install')\ndef get_signtool():\n    \"\"\" get path to code signing tool \"\"\"\n    if PLATFORM == 'win':\n        sdk_dir = 'c:\\\\Program Files (x86)\\\\Windows Kits\\\\10'  # os.environ['WindowsSdkDir']\n        return os.path.join(sdk_dir, 'bin', 'x86', 'signtool.exe')\n    elif PLATFORM == 'osx':\n        return '/usr/bin/codesign'\n@contextmanager\ndef cd(new_dir):",
         "detail": "third-party.discord-rpc.build",
+        "documentation": {}
+    },
+    {
+        "label": "cmake_get_available_generators",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def cmake_get_available_generators():\n  \"\"\"Returns list of generators available in current CMake executable.\"\"\"\n  result = run_process_and_capture_output(f'{CMAKE} --help')\n  if result[0] != 0:\n    raise Exception(f'cmake --help failed, exit code: {result[0]}\\n{result[1]}')\n  help_text = result[1].splitlines()\n  generators_start_index = help_text.index('Generators') + 3\n  generators_text = help_text[generators_start_index::]\n  generators = []\n  for gen in generators_text:",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "cmake_get_generator",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def cmake_get_generator():\n  \"\"\"Returns the CMake generator from CMakeCache.txt in the current dir.\"\"\"\n  cmake_cache_file_path = os.path.join(os.getcwd(), 'CMakeCache.txt')\n  cmake_cache_text = ''\n  with open(cmake_cache_file_path, 'r') as cmake_cache_file:\n    cmake_cache_text = cmake_cache_file.read()\n  if not cmake_cache_text:\n    raise FileNotFoundError(f'{cmake_cache_file_path} missing or empty.')\n  generator = ''\n  for line in cmake_cache_text.splitlines():",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "run_process_and_capture_output",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def run_process_and_capture_output(cmd, env=None):\n  \"\"\"Runs |cmd| as a child process.\n  Returns process exit code and output. Streams process output to stdout when\n  VERBOSE is true.\n  Args:\n    cmd: String containing the command to execute.\n    env: Optional dict of environment variables.\n  Returns:\n    Tuple of exit code and output.\n  \"\"\"",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "create_output_directories",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def create_output_directories():\n  \"\"\"Creates the build output directores for the test.\"\"\"\n  pathlib.Path(DRACO_SHARED_BUILD_PATH).mkdir(parents=True, exist_ok=True)\n  pathlib.Path(DRACO_STATIC_BUILD_PATH).mkdir(parents=True, exist_ok=True)\n  pathlib.Path(TEST_SHARED_BUILD_PATH).mkdir(parents=True, exist_ok=True)\n  pathlib.Path(TEST_STATIC_BUILD_PATH).mkdir(parents=True, exist_ok=True)\ndef cleanup():\n  \"\"\"Removes the build output directories from the test.\"\"\"\n  shutil.rmtree(DRACO_SHARED_BUILD_PATH)\n  shutil.rmtree(DRACO_STATIC_BUILD_PATH)",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "cleanup",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def cleanup():\n  \"\"\"Removes the build output directories from the test.\"\"\"\n  shutil.rmtree(DRACO_SHARED_BUILD_PATH)\n  shutil.rmtree(DRACO_STATIC_BUILD_PATH)\n  shutil.rmtree(DRACO_SHARED_INSTALL_PATH)\n  shutil.rmtree(DRACO_STATIC_INSTALL_PATH)\n  shutil.rmtree(TEST_SHARED_BUILD_PATH)\n  shutil.rmtree(TEST_STATIC_BUILD_PATH)\n  shutil.rmtree(TEST_SHARED_INSTALL_PATH)\n  shutil.rmtree(TEST_STATIC_INSTALL_PATH)",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "cmake_configure",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def cmake_configure(source_path, cmake_args=None):\n  \"\"\"Configures a CMake build.\"\"\"\n  command = f'{CMAKE} {source_path}'\n  if CMAKE_GENERATOR:\n    if ' ' in CMAKE_GENERATOR:\n      command += f' -G \"{CMAKE_GENERATOR}\"'\n    else:\n      command += f' -G {CMAKE_GENERATOR}'\n  if cmake_args:\n    for arg in cmake_args:",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "cmake_build",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def cmake_build(cmake_args=None, build_args=None):\n  \"\"\"Runs a CMake build.\"\"\"\n  command = f'{CMAKE} --build .'\n  if cmake_args:\n    for arg in cmake_args:\n      command += f' {arg}'\n  if not build_args:\n    build_args = []\n  generator = cmake_get_generator()\n  if generator.endswith('Makefiles'):",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "run_install_check",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def run_install_check(install_path):\n  \"\"\"Runs the install_check program.\"\"\"\n  cmd = os.path.join(install_path, 'bin', 'install_check')\n  if VERBOSE:\n    print(f'RUN command: {cmd}')\n  result = run_process_and_capture_output(\n      cmd,\n      # On Windows, add location of draco.dll into PATH env var\n      {'PATH': DRACO_SHARED_INSTALL_BIN_PATH + os.pathsep + os.environ['PATH']},\n    )",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "build_and_install_transcoder_dependencies",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def build_and_install_transcoder_dependencies():\n  \"\"\"Builds and installs Draco dependencies for transcoder enabled builds.\"\"\"\n  orig_dir = os.getcwd()\n  # The Eigen CMake build in the release Draco has pinned is, to put it mildly,\n  # user unfriendly. Instead of wasting time trying to integrate it here, just\n  # shutil.copytree() everything in $eigen_submodule_path to\n  # $CMAKE_INSTALL_PREFIX/include/Eigen.\n  # Eigen claims to be header-only, so this should be adequate for Draco's\n  # needs here.\n  eigen_submodule_path = os.path.join(",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "build_and_install_draco",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def build_and_install_draco():\n  \"\"\"Builds Draco in shared and static configurations.\"\"\"\n  orig_dir = os.getcwd()\n  if ENABLE_TRANSCODER:\n    build_and_install_transcoder_dependencies()\n  # Build and install Draco in shared library config for the current host\n  # machine.\n  os.chdir(DRACO_SHARED_BUILD_PATH)\n  cmake_args = []\n  cmake_args.append(f'-DCMAKE_INSTALL_PREFIX={DRACO_SHARED_INSTALL_PATH}')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "build_test_project",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def build_test_project():\n  \"\"\"Builds the test application in shared and static configurations.\"\"\"\n  orig_dir = os.getcwd()\n  # Configure the test project against draco shared and build it.\n  os.chdir(TEST_SHARED_BUILD_PATH)\n  cmake_args = []\n  cmake_args.append(f'-DCMAKE_INSTALL_PREFIX={TEST_SHARED_INSTALL_PATH}')\n  cmake_args.append(f'-DCMAKE_PREFIX_PATH={DRACO_SHARED_INSTALL_PATH}')\n  cmake_args.append(f'-DCMAKE_INSTALL_RPATH={DRACO_SHARED_INSTALL_LIB_PATH}')\n  cmake_configure(source_path=f'{TEST_SOURCES_PATH}', cmake_args=cmake_args)",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "test_draco_install",
+        "kind": 2,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "def test_draco_install():\n  create_output_directories()\n  build_and_install_draco()\n  build_test_project()\n  cleanup()\nif __name__ == '__main__':\n  CMAKE_AVAILABLE_GENERATORS = cmake_get_available_generators()\n  parser = argparse.ArgumentParser()\n  parser.add_argument(\n      '-G', '--generator', help='CMake builds use the specified generator.')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "CMAKE",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "CMAKE = shutil.which('cmake')\n# List of generators available in the current CMake executable.\nCMAKE_AVAILABLE_GENERATORS = []\n# List of variable defs to be passed through to CMake via its -D argument.\nCMAKE_DEFINES = []\n# CMake builds use the specified generator.\nCMAKE_GENERATOR = None\n# Enable the transcoder before running tests (sets DRACO_TRANSCODER_SUPPORTED\n# and builds transcoder support dependencies).\nENABLE_TRANSCODER = False",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "CMAKE_AVAILABLE_GENERATORS",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "CMAKE_AVAILABLE_GENERATORS = []\n# List of variable defs to be passed through to CMake via its -D argument.\nCMAKE_DEFINES = []\n# CMake builds use the specified generator.\nCMAKE_GENERATOR = None\n# Enable the transcoder before running tests (sets DRACO_TRANSCODER_SUPPORTED\n# and builds transcoder support dependencies).\nENABLE_TRANSCODER = False\n# The Draco tree that this script uses.\nDRACO_SOURCES_PATH = os.path.abspath(os.path.join('..', '..', '..', '..'))",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "CMAKE_DEFINES",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "CMAKE_DEFINES = []\n# CMake builds use the specified generator.\nCMAKE_GENERATOR = None\n# Enable the transcoder before running tests (sets DRACO_TRANSCODER_SUPPORTED\n# and builds transcoder support dependencies).\nENABLE_TRANSCODER = False\n# The Draco tree that this script uses.\nDRACO_SOURCES_PATH = os.path.abspath(os.path.join('..', '..', '..', '..'))\n# Path to this script and the rest of the test project files.\nTEST_SOURCES_PATH = os.path.dirname(os.path.abspath(__file__))",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "CMAKE_GENERATOR",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "CMAKE_GENERATOR = None\n# Enable the transcoder before running tests (sets DRACO_TRANSCODER_SUPPORTED\n# and builds transcoder support dependencies).\nENABLE_TRANSCODER = False\n# The Draco tree that this script uses.\nDRACO_SOURCES_PATH = os.path.abspath(os.path.join('..', '..', '..', '..'))\n# Path to this script and the rest of the test project files.\nTEST_SOURCES_PATH = os.path.dirname(os.path.abspath(__file__))\n# The Draco build directories.\nDRACO_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_shared')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "ENABLE_TRANSCODER",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "ENABLE_TRANSCODER = False\n# The Draco tree that this script uses.\nDRACO_SOURCES_PATH = os.path.abspath(os.path.join('..', '..', '..', '..'))\n# Path to this script and the rest of the test project files.\nTEST_SOURCES_PATH = os.path.dirname(os.path.abspath(__file__))\n# The Draco build directories.\nDRACO_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_shared')\nDRACO_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_static')\n# The Draco install roots.\nDRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_SOURCES_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_SOURCES_PATH = os.path.abspath(os.path.join('..', '..', '..', '..'))\n# Path to this script and the rest of the test project files.\nTEST_SOURCES_PATH = os.path.dirname(os.path.abspath(__file__))\n# The Draco build directories.\nDRACO_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_shared')\nDRACO_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_static')\n# The Draco install roots.\nDRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_shared')\nDRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "TEST_SOURCES_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "TEST_SOURCES_PATH = os.path.dirname(os.path.abspath(__file__))\n# The Draco build directories.\nDRACO_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_shared')\nDRACO_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_static')\n# The Draco install roots.\nDRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_shared')\nDRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_static')\nDRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_SHARED_BUILD_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_shared')\nDRACO_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_static')\n# The Draco install roots.\nDRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_shared')\nDRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_static')\nDRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')\nDRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_STATIC_BUILD_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_draco_build_static')\n# The Draco install roots.\nDRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_shared')\nDRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_static')\nDRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')\nDRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of\n# build jobs.",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_SHARED_INSTALL_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_shared')\nDRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_static')\nDRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')\nDRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of\n# build jobs.\nNUM_PROCESSES = multiprocessing.cpu_count() - 1\n# The test project build directories.",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_STATIC_INSTALL_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                         '_draco_install_static')\nDRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')\nDRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of\n# build jobs.\nNUM_PROCESSES = multiprocessing.cpu_count() - 1\n# The test project build directories.\nTEST_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_shared')\nTEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_SHARED_INSTALL_BIN_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_SHARED_INSTALL_BIN_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'bin')\nDRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of\n# build jobs.\nNUM_PROCESSES = multiprocessing.cpu_count() - 1\n# The test project build directories.\nTEST_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_shared')\nTEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')\n# The test project install directories.\nTEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "DRACO_SHARED_INSTALL_LIB_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "DRACO_SHARED_INSTALL_LIB_PATH = os.path.join(DRACO_SHARED_INSTALL_PATH, 'lib')\n# Argument for -j when using make, or -m when using Visual Studio. Number of\n# build jobs.\nNUM_PROCESSES = multiprocessing.cpu_count() - 1\n# The test project build directories.\nTEST_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_shared')\nTEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')\n# The test project install directories.\nTEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_shared')",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "NUM_PROCESSES",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "NUM_PROCESSES = multiprocessing.cpu_count() - 1\n# The test project build directories.\nTEST_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_shared')\nTEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')\n# The test project install directories.\nTEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_shared')\nTEST_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_static')\n# Show configuration and build output.",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "TEST_SHARED_BUILD_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "TEST_SHARED_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_shared')\nTEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')\n# The test project install directories.\nTEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_shared')\nTEST_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_static')\n# Show configuration and build output.\nVERBOSE = False\ndef cmake_get_available_generators():",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "TEST_STATIC_BUILD_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "TEST_STATIC_BUILD_PATH = os.path.join(TEST_SOURCES_PATH, '_test_build_static')\n# The test project install directories.\nTEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_shared')\nTEST_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_static')\n# Show configuration and build output.\nVERBOSE = False\ndef cmake_get_available_generators():\n  \"\"\"Returns list of generators available in current CMake executable.\"\"\"",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "TEST_SHARED_INSTALL_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "TEST_SHARED_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_shared')\nTEST_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_static')\n# Show configuration and build output.\nVERBOSE = False\ndef cmake_get_available_generators():\n  \"\"\"Returns list of generators available in current CMake executable.\"\"\"\n  result = run_process_and_capture_output(f'{CMAKE} --help')\n  if result[0] != 0:",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "TEST_STATIC_INSTALL_PATH",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "TEST_STATIC_INSTALL_PATH = os.path.join(TEST_SOURCES_PATH,\n                                        '_test_install_static')\n# Show configuration and build output.\nVERBOSE = False\ndef cmake_get_available_generators():\n  \"\"\"Returns list of generators available in current CMake executable.\"\"\"\n  result = run_process_and_capture_output(f'{CMAKE} --help')\n  if result[0] != 0:\n    raise Exception(f'cmake --help failed, exit code: {result[0]}\\n{result[1]}')\n  help_text = result[1].splitlines()",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
+        "documentation": {}
+    },
+    {
+        "label": "VERBOSE",
+        "kind": 5,
+        "importPath": "third-party.draco.src.draco.tools.install_test.test",
+        "description": "third-party.draco.src.draco.tools.install_test.test",
+        "peekOfCode": "VERBOSE = False\ndef cmake_get_available_generators():\n  \"\"\"Returns list of generators available in current CMake executable.\"\"\"\n  result = run_process_and_capture_output(f'{CMAKE} --help')\n  if result[0] != 0:\n    raise Exception(f'cmake --help failed, exit code: {result[0]}\\n{result[1]}')\n  help_text = result[1].splitlines()\n  generators_start_index = help_text.index('Generators') + 3\n  generators_text = help_text[generators_start_index::]\n  generators = []",
+        "detail": "third-party.draco.src.draco.tools.install_test.test",
         "documentation": {}
     },
     {
