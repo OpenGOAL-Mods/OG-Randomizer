@@ -392,7 +392,7 @@
   )
 
 (defun resetCheckpointRandomizer ()
-  (format 0 "RANDOMIZER: resetCheckpointRandomizer!~%")
+  ;; (format 0 "RANDOMIZER: resetCheckpointRandomizer!~%")
   (set! (-> *rando-state* collectable-count) 0)
 
   (when (-> *randomizer-settings* use-random-seed?)
@@ -450,4 +450,250 @@
   (generateCheckpointList (-> *randomizer-settings* current-seed) *rando-list-length*)
   ;; Print this list of checkpoints to REPL for debugging purposes
   (-> *rando-state* checkpoint-list)
+  )
+
+(define *desired-warp-list* (the-as (array string) (new
+                                             'static
+                                             'boxed-array
+                                            ;;  :type string :length 3 :allocated-length 3
+                                             :type string :length 72 :allocated-length 72
+  "game-start" ;; geyser flies
+  "training-far" ;; geyser door
+  "training-far" ;; geyser cliff
+  "misty-bike" ;; misty boosted
+  "misty-bike" ;; misty zoomer
+  "misty-silo2" ;; misty ship
+  "misty-bike" ;; misty pool
+  "misty-start" ;; misty flies
+  "misty-silo" ;; misty cannon
+  "jungle-tower" ;; jungle switch
+  "jungle-start" ;; jungle island
+  "jungle-far" ;; jungle door
+  "jungle-far" ;; jungle tower
+  "jungle-far" ;; jungle flies
+  "beach-start" ;; misty muse
+  "beach-start" ;; beach gimme
+  "beach-pelican" ;; beach cannon
+  "beach-pelican" ;; beach pelican
+  "beach-far" ;; beach sentinel
+  "beach-far" ;; beach harvesters
+  "beach-far" ;; beach birds
+  "beach-far" ;; beach flies
+  "beach-far" ;; beach flut
+  "beach-start" ;; sandover mayor
+  "village1-far" ;; sandover uncle
+  "village1-far" ;; sandover flies
+  "firecanyon-start" ;; fc flies
+  "village2-warp" ;; fc end
+  "rolling-start" ;; basin jump
+  "rolling-start" ;; basin flies
+  "rolling-start" ;; rv geologist
+  "swamp-cave3" ;; swamp tether 4
+  "swamp-dock1" ;; swamp tether 1
+  "swamp-dock2" ;; swamp tether 2
+  "swamp-flutflut" ;; swamp flut
+  "swamp-cave2" ;; swamp tether 3
+  "sunken1" ;; lpc pipe
+  "sunken2" ;; lpc complex
+  "sunken2" ;; lpc puzzle
+  "sunken-tube1" ;; lpc pool
+  "sunken-tube1" ;; lpc piggyback
+  "sunken-tube1" ;; lpc chamber
+  "sunken-helix" ;; lpc bottom
+  "village2-dock" ;; rv gambler
+  "village2-dock" ;; rv warrior
+  "snow-across-from-flut" ;; snowy switch
+  "ogre-end" ;; mp end
+  "ogre-race" ;; mp secret
+  "ogre-end" ;; mp flies
+  "village3-warp" ;; sc platforms
+  "maincave-to-darkcave" ;; sc dark cave
+  "maincave-to-darkcave" ;; sc crystals
+  "robocave-start" ;; sc nest
+  "robocave-bottom" ;; sc robot
+  "robocave-bottom" ;; sc poles
+  "robocave-bottom" ;; sc flies
+  "maincave-to-darkcave" ;; crater crate
+  "snow-by-ice-lake" ;; snowy crate
+  "snow-pass-to-fort" ;; snowy lurker cave
+  "snow-pass-to-fort" ;; snowy gate
+  "snow-fort" ;; snowy fort
+  "snow-start" ;; snowy flies
+  "citadel-generator-start" ;; citadel green
+  "citadel-generator-end" ;; citadel red
+  "citadel-launch-start" ;; citadel yellow
+  "citadel-plat-end" ;; citadel blue
+  "citadel-start" ;; citadel flies
+  "village3-farside" ;; miners
+  "village3-farside" ;; miners
+  "village3-farside" ;; crater flies
+  "lavatube-end" ;; tube end
+  "citadel-elevator" ;; FINAL BOSS
+  )
+  )
+  )
+
+
+(define *desired-warp-list2* (the-as (array string) (new
+                                             'static
+                                             'boxed-array
+                                            ;;  :type string :length 3 :allocated-length 3
+                                             :type string :length 72 :allocated-length 72
+  "game-start" ;; geyser flies
+  "training-far" ;; geyser door
+  "training-far" ;; geyser cliff
+  "misty-bike" ;; misty boosted
+  "misty-bike" ;; misty zoomer
+  "misty-silo2" ;; misty ship
+  "misty-bike" ;; misty pool
+  "misty-start" ;; misty flies
+  "misty-silo" ;; misty cannon
+  "jungle-tower" ;; jungle switch
+  "jungle-start" ;; jungle island
+  "jungle-far" ;; jungle door
+  "jungle-far" ;; jungle tower
+  "jungle-far" ;; jungle flies
+  "beach-start" ;; misty muse
+  "beach-start" ;; beach gimme
+  "beach-pelican" ;; beach cannon
+  "beach-pelican" ;; beach pelican
+  "beach-far" ;; beach sentinel
+  "beach-far" ;; beach harvesters
+  "beach-far" ;; beach birds
+  "beach-far" ;; beach flies
+  "beach-far" ;; beach flut
+  "beach-start" ;; sandover mayor
+  "village1-far" ;; sandover uncle
+  "village1-far" ;; sandover flies
+  "firecanyon-start" ;; fc flies
+  "firecanyon-end" ;; fc end
+  "village2-warp" ;; rv warrior
+  "village2-start" ;; basin jump
+  "rolling-start" ;; basin flies
+  "rolling-start" ;; rv geologist
+  "swamp-start" ;; swamp tether 4
+  "swamp-dock1" ;; swamp tether 1
+  "swamp-dock2" ;; swamp tether 2
+  "swamp-flutflut" ;; swamp flut
+  "swamp-cave2" ;; swamp tether 3
+  "sunken1" ;; lpc pipe
+  "sunken2" ;; lpc complex
+  "sunken2" ;; lpc puzzle
+  "sunken-tube1" ;; lpc pool
+  "sunken-tube1" ;; lpc piggyback
+  "sunken-tube1" ;; lpc chamber
+  "sunken-helix" ;; lpc bottom
+  "village2-dock" ;; rv gambler
+  "village2-dock" ;; rv flies
+  "snow-across-from-flut" ;; snowy switch
+  "ogre-end" ;; mp end
+  "ogre-race" ;; mp secret
+  "ogre-end" ;; mp flies
+  "village3-warp" ;; sc platforms
+  "robocave-start" ;; sc nest
+  "robocave-bottom" ;; sc robot
+  "robocave-bottom" ;; sc poles
+  "maincave-to-darkcave" ;; crater crate
+  "snow-by-ice-lake" ;; snowy crate
+  "snow-pass-to-fort" ;; snowy lurker cave
+  "snow-outside-fort" ;; snowy gate
+  "snow-fort" ;; snowy fort
+  "snow-start" ;; snowy flies
+  "citadel-generator-start" ;; citadel green
+  "citadel-generator-end" ;; citadel red
+  "citadel-launch-start" ;; citadel yellow
+  "citadel-plat-end" ;; citadel blue
+  "citadel-start" ;; citadel flies
+  "village3-farside" ;; miners
+  "village3-farside" ;; miners
+  "village3-farside" ;; miners
+  "village3-farside" ;; miners
+  "village3-farside" ;; crater flies
+  "lavatube-end" ;; tube end
+  "citadel-elevator" ;; FINAL BOSS
+  )
+  )
+  )
+
+(defun find-desired-seed ()
+  (process-spawn-function process
+    :name 'find-desired-seed-proc
+    :to *active-pool*
+    ;This lambda is our function
+    (lambda :behavior process ()
+      (stack-size-set! (-> self main-thread) 2048)
+      (let ((best 0)
+            (best-seed (the uint 0))
+            (best-with-cita-end 0)
+            (best-seed-with-cita-end (the uint 0))
+            (counter 0)
+            )
+        (while #t
+          (let ((used1 (new 'stack-no-clear 'array 'symbol 72))
+                (tmp1 0)
+                (used2 (new 'stack-no-clear 'array 'symbol 72))
+                (tmp2 0)
+                )
+            (dotimes (j (length *desired-warp-list*))
+              (set! (-> used1 j) #f)
+              (set! (-> used2 j) #f)
+              )
+            
+            (+! counter 1)
+            (when (> counter 100)
+              (set! counter 0)
+              (suspend) ;; let the MFer breathe
+              )
+            (resetCheckpointRandomizer)
+            ;; (format 0 "trying seed ~D~%" (-> *randomizer-settings* current-seed))
+
+            ;; see if list matches
+            (dotimes (i (length *desired-warp-list*)) ;; loop thru first X rando-state checkpoint-list warps and see how many we wanted
+              (dotimes (j (length *desired-warp-list*)) ;; loop thru desired list to find unused match
+                (when (and (not (-> used1 j)) (string= (-> *desired-warp-list* j) (-> *rando-state* checkpoint-list i)))
+                  (true! (-> used1 j))
+                  (+! tmp1 1)
+                  (set! j (length *desired-warp-list*))
+                  ;; (format 0 "   list1 wanted ~S, so far matches ~D ~%" (-> *desired-warp-list* j) tmp1)
+                  )
+                )
+              (dotimes (j (length *desired-warp-list*)) ;; loop thru desired list to find unused match
+                (when (and (not (-> used2 j)) (string= (-> *desired-warp-list2* j) (-> *rando-state* checkpoint-list i)))
+                  (true! (-> used2 j))
+                  (+! tmp2 1)
+                  (set! j (length *desired-warp-list*))
+                  ;; (format 0 "   list2 wanted ~S, so far matches ~D ~%" (-> *desired-warp-list2* j) tmp2)
+                  )
+                )
+              )
+            
+            (when (string= (-> *rando-state* checkpoint-list 71) "citadel-elevator")
+              (when (< best-with-cita-end tmp1)
+                (set! best-with-cita-end tmp1)
+                (set! best-seed-with-cita-end (-> *randomizer-settings* current-seed))
+                (format 0 "New best seed with citadel-elevator end, matched ~D/72 desired warps: ~D ~%" best-with-cita-end best-seed-with-cita-end)
+                )
+              (when (< best-with-cita-end tmp2)
+                (set! best-with-cita-end tmp2)
+                (set! best-seed-with-cita-end (-> *randomizer-settings* current-seed))
+                (format 0 "New best seed with citadel-elevator end, matched ~D/72 desired warps: ~D ~%" best-with-cita-end best-seed-with-cita-end)
+                )
+              )
+            
+            (when (< best tmp1)
+              (set! best tmp1)
+              (set! best-seed (-> *randomizer-settings* current-seed))
+              (format 0 "New best seed, matched ~D/72 desired warps: ~D ~%" best best-seed)
+              )
+            (when (< best tmp2)
+              (set! best tmp2)
+              (set! best-seed (-> *randomizer-settings* current-seed))
+              (format 0 "New best seed, matched ~D/72 desired warps: ~D ~%" best best-seed)
+              )
+            )
+          )
+        )
+      )
+    )
+  (none)
   )
