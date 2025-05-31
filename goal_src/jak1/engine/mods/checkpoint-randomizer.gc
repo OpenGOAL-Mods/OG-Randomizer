@@ -332,6 +332,14 @@
     )
   )
 
+;; 104375152105646 
+(defun printList ()
+  (format 0 "SEED: ~D~%~%" (-> *randomizer-settings* current-seed))
+  (dotimes (idx 100) ;; *rando-list-length*)
+    (format 0 "~D: ~S~%" (+ idx 1) (-> *rando-state* checkpoint-list idx)))
+  (none)
+  )
+
 (defun warpToCheckpoint ((checkpointName string))
   ;; warps to checkpoint, assuming it is already safe to use
   (format 0 "RANDOMIZER: ...warping to ~A~%" checkpointName)
