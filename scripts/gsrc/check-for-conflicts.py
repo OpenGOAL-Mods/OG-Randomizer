@@ -10,11 +10,14 @@ for dirpath, subdirs, files in os.walk("./goal_src"):
   for filename in files:
     # Get the file contents
     with open(os.path.join(dirpath, filename), "r") as f:
-      lines = f.readlines()
-      for line in lines:
-        if "<<<<<<<" in line:
-          files_with_unresolved_conflicts.append(os.path.join(dirpath, filename))
-          break
+      try:
+        lines = f.readlines()
+        for line in lines:
+          if "<<<<<<<" in line:
+            files_with_unresolved_conflicts.append(os.path.join(dirpath, filename))
+            break
+      except:
+        print("failed on", filename)
 
 if len(files_with_unresolved_conflicts) == 0:
   exit(0)

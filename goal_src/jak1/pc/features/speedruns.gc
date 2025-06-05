@@ -7,8 +7,6 @@
 (define *speedrun-info*
   (new 'static 'speedrun-info-jak1 :should-display? #t :needs-post-blackout-setup? #f :has-started? #f))
 
-(define *has-landed?* #f)
-
 (define-extern *mod-version-text* string)
 
 (define *hub1-cell-list*

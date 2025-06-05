@@ -124,6 +124,7 @@
   (credits)
   (quit-title)
   (flava-player)
+  ;; some randomizer options in the middle here oops
   (mod-options)
   (randomizer-warp-options)
   (randomizer-main-options)
@@ -137,6 +138,10 @@
   (speedrun-il-options)
   (speedrun-cat-ext-options)
 
+  ;; modbase additions
+  (save-and-load-game)
+  (memcard-saving-and-loading)
+  (memcard-data-exists-save-and-load)
 
   ;; the last one!
   (max)
@@ -169,11 +174,11 @@
   (aspect-native)
   (button-music)
   (button-flava)
+  (cheat-toggle)
   (monitor)
   (controller)
   (binding-assignment)
   (confirmation)
-  (cheat-toggle)
   (use-random-seed?)
   (rng-lib)
   (checkpoint-logic)
