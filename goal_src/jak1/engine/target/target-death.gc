@@ -144,8 +144,16 @@
       (set! *spawn-actors* #t)
       (set! *teleport* #t)
       (set! (-> *ACTOR-bank* birth-max) 1000)
-      (if  (-> *randomizer-settings* checkpoint-randomizer?)
-        (auto-save-command 'auto-save 0 0 *default-pool*)
+      (when  (-> *randomizer-settings* checkpoint-randomizer?)
+        (process-spawn-function process 
+          (lambda ()
+            ;; suspend until any other auto save proc finishes
+            (while (handle->process (-> *game-info* auto-save-proc))
+              (suspend))
+            (auto-save-command 'auto-save 0 0 *default-pool*)
+            (none)
+            )
+          )
         )
       (set-blackout-frames (seconds 0.1))
       (cond
