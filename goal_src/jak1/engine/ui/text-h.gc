@@ -855,6 +855,11 @@
   (checkpoint-swamp-flutflut    #x1755)
   (checkpoint-village3-cart     #x1756)
 
+  ;; Rando Stats
+  (randomizer-stats             #x1770)
+  (checkpoint-list              #x1771)
+  (spawns-by-level              #x1772)
+
   ;; mod text mod-base-change
   (pad-triangle #x2000)
   (pad-circle #x2001)

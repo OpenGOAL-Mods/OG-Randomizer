@@ -349,6 +349,7 @@
   (none))
 
 (defbehavior progress-init-by-other progress ()
+  ;; (stack-size-set! (-> self main-thread) 512)
   (logclear! (-> self mask) (process-mask menu progress))
   (set! (-> self nb-of-particles) 0)
   (set! (-> self max-nb-of-particles) 40)
@@ -622,6 +623,9 @@
                         (= v1-2 (progress-screen settings-title))
                         (= v1-2 (progress-screen camera-options))
                         (= v1-2 (progress-screen mod-options))
+                        (= v1-2 (progress-screen randomizer-stats-options))
+                        (= v1-2 (progress-screen checkpoint-list))
+                        (= v1-2 (progress-screen spawns-by-level))
                         (= v1-2 (progress-screen randomizer-main-options))
                         (= v1-2 (progress-screen randomizer-warp-options))
                         (= v1-2 (progress-screen challenges-options))

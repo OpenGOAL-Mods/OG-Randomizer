@@ -137,6 +137,9 @@
   (speedrun-options)
   (speedrun-il-options)
   (speedrun-cat-ext-options)
+  (randomizer-stats-options)
+  (checkpoint-list)
+  (spawns-by-level)
 
   ;; modbase additions
   (save-and-load-game)
@@ -182,6 +185,8 @@
   (use-random-seed?)
   (rng-lib)
   (checkpoint-logic)
+  (checkpoint-list)
+  (spawns-by-level)
   )
 
     ) ;; end of PC_PORT = #t branch for enum initialization

@@ -215,6 +215,9 @@
 (defmacro time-elapsed? (time duration)
   `(>= (- (current-time) ,time) ,duration))
 
+(defmacro time-elapsed-real? (time duration)
+  `(>= (- (real-current-time) ,time) ,duration))
+
 ;; debug stuff really
 (defmacro get-screen-x (frac)
   `(the int (* ,frac 512)))
