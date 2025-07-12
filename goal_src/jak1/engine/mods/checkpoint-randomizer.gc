@@ -352,18 +352,6 @@
   )
 
 (defun checkpointValid? ((checkpointName string))
-  (case-str checkpointName
-    ;; avoid village1-warp if cutscene tasks not closed
-    (("village1-warp")
-      (if (or
-          (not (task-closed? (game-task intro) (task-status need-resolution)))
-          (not (task-closed? (game-task beach-ecorocks) (task-status need-introduction)))
-          )
-        (return #f)
-        )
-      )
-    )
-
   ;; additional checkpoints enabled/disabled
   (if (logtest? (-> (get-continue-by-name *game-info* checkpointName) flags) (continue-flags additional-disabled))
     (return #f)
@@ -458,4 +446,144 @@
   (generateCheckpointList (-> *randomizer-settings* current-seed) *rando-list-length*)
   ;; Print this list of checkpoints to REPL for debugging purposes
   (-> *rando-state* checkpoint-list)
+  )
+
+
+(define *checkpoint-text* (new 'global 'string 128 (the string #f)))
+(define *checkpoint-case-txt* (new 'global 'string 128 (the string #f)))
+(defun get-checkpoint-text ((idx int))
+  (let* ((name (-> *rando-state* checkpoint-list idx))
+         (name-up (string-upcase name (clear *checkpoint-case-txt*))))
+    (cond
+      ((checkpointValid? name)
+        (format (clear *checkpoint-text*) "~D. ~1L~S" (+ idx 1) name-up)
+        )
+      (else
+        (format (clear *checkpoint-text*) "~D. ~2L~S" (+ idx 1) name-up)
+        )
+      )
+    *checkpoint-text*
+    )
+  )
+
+(defun get-spawns-by-level-text ((want-idx int))
+  ;; first aggregate spawns (should probably cache this but yolo)
+  (let ((counts (new 'stack-no-clear 'array 'int32 19)))
+    ;; reset array
+    (dotimes (idx 19)
+      (set! (-> counts idx) 0))
+    
+    (dotimes (idx (-> *rando-state* next-idx))
+      (let* ((name (-> *rando-state* checkpoint-list idx))
+             (lvl (-> (get-continue-by-name *game-info* name) level)))
+        (when (checkpointValid? name)
+          ;; update hub counter
+          (case lvl :comp name=
+            ;; hub1
+            (('training 'village1 'beach 'jungle 'jungleb 'misty 'firecanyon) (+! (-> counts 0) 1))
+            ;; hub2
+            (('village2 'sunken 'sunkenb 'swamp 'rolling 'ogre) (+! (-> counts 1) 1))
+            ;; hub3+
+            (('village3 'snow 'maincave 'darkcave 'robocave 'lavatube 'citadel) (+! (-> counts 2) 1))
+            )
+          ;; update level counter
+          (case lvl :comp name=
+            (('training)                      (+! (-> counts 3) 1))
+            (('village1)                      (+! (-> counts 4) 1))
+            (('beach)                         (+! (-> counts 5) 1))
+            (('jungle 'jungleb)               (+! (-> counts 6) 1))
+            (('misty)                         (+! (-> counts 7) 1))
+            (('firecanyon)                    (+! (-> counts 8) 1))
+            (('village2)                      (+! (-> counts 9) 1))
+            (('sunken 'sunkenb)               (+! (-> counts 10) 1))
+            (('swamp)                         (+! (-> counts 11) 1))
+            (('rolling)                       (+! (-> counts 12) 1))
+            (('ogre)                          (+! (-> counts 13) 1))
+            (('village3)                      (+! (-> counts 14) 1))
+            (('snow)                          (+! (-> counts 15) 1))
+            (('maincave 'darkcave 'robocave)  (+! (-> counts 16) 1))
+            (('lavatube)                      (+! (-> counts 17) 1))
+            (('citadel)                       (+! (-> counts 18) 1))
+            )
+          )
+        )
+      )
+    ;; now format text for the row we care about
+    (let ((freq (if (nonzero? (-> *rando-state* next-idx))
+                      (/ (the float (-> counts want-idx)) (-> *rando-state* next-idx))
+                      0.0))
+          (name (case want-idx
+            ((0) "HUB 1")
+            ((1) "HUB 2")
+            ((2) "HUB 3+")
+            ((3) "GEYSER ROCK")
+            ((4) "SANDOVER VILLAGE")
+            ((5) "SENTINEL BEACH")
+            ((6) "FORBIDDEN JUNGLE")
+            ((7) "MISTY ISLAND")
+            ((8) "FIRE CANYON")
+            ((9) "ROCK VILLAGE")
+            ((10) "LOST PRECURSOR CITY")
+            ((11) "BOGGY SWAMP")
+            ((12) "PRECURSOR BASIN")
+            ((13) "MOUNTAIN PASS")
+            ((14) "VOLCANIC CRATER")
+            ((15) "SNOWY MOUNTAIN")
+            ((16) "SPIDER CAVE")
+            ((17) "LAVA TUBE")
+            (else "GOL AND MAIA\c12S CITADEL")
+            )))
+      ;; 1/16 = 0.0625 avg expected value for individual levels, highlight around this
+      (cond
+        ((<= want-idx 2)
+          ;; hub 1-3, dont highlight
+          (format (clear *checkpoint-text*) "~S: ~1L~D" name (-> counts want-idx))
+          )
+        ((<= freq 0.01)
+          ;; really low
+          (format (clear *checkpoint-text*) "~S: ~7L~D" name (-> counts want-idx))
+          )
+        ((<= freq 0.04)
+          ;; below avg
+          (format (clear *checkpoint-text*) "~S: ~8L~D" name (-> counts want-idx))
+          )
+        ((<= freq 0.085)
+          ;; near avg
+          (format (clear *checkpoint-text*) "~S: ~1L~D" name (-> counts want-idx))
+          )
+        ((<= freq 0.115)
+          ;; above avg
+          (format (clear *checkpoint-text*) "~S: ~5L~D" name (-> counts want-idx))
+          )
+        (else
+          ;; really high
+          (format (clear *checkpoint-text*) "~S: ~3L~D" name (-> counts want-idx))          
+          )
+        )
+      )
+
+    *checkpoint-text*
+    )
+  )
+
+(defun get-rando-stats-heading ()
+  (clear *checkpoint-text*)
+  (format *checkpoint-text* "~S / ~S~%" 
+    (if (-> *randomizer-settings* use-random-seed?) "RANDOM SEED" "SET SEED")
+    (if (= (-> *randomizer-settings* checkpoint-logic) 'logic-random-level) "RANDOM LEVEL" "RANDOM CHECKPOINT"))
+  (format *checkpoint-text* "WARP OPTIONS: ~S~S~S~S~S"
+    (if (-> *randomizer-settings* warp-on-cell?) "C" "")
+    (if (-> *randomizer-settings* warp-on-orb?) "O" "")
+    (if (-> *randomizer-settings* warp-on-buzzer?) "F" "")
+    (if (-> *randomizer-settings* warp-on-green-eco?) "G" "")
+    (if (-> *randomizer-settings* warp-on-blue-eco?) "B" ""))
+  (format *checkpoint-text* "~S~S~S~S~D~%" 
+    (if (-> *randomizer-settings* warp-on-red-eco?) "R" "")
+    (if (-> *randomizer-settings* warp-on-yellow-eco?) "Y" "")
+    (if (-> *randomizer-settings* warp-on-eco-vents?) "V" "")
+    (if (-> *randomizer-settings* warp-on-death?) "D" "")
+    (the int (-> *randomizer-settings* collectables-needed-to-warp)))
+  (format *checkpoint-text* "SEED: ~D" (-> *randomizer-settings* current-seed))
+  
+  *checkpoint-text*
   )
