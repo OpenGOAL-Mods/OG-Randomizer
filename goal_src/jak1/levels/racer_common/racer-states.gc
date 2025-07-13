@@ -471,6 +471,7 @@
   :enter
     (behavior ((arg0 float) (arg1 symbol))
       (sound-play "smack-surface")
+      (+! (-> *game-info* continue-deaths) 1) ;; count total-bonks here
       (if (-> *challenges-settings* challenges-bonkless?)
         (reset-all)
         )

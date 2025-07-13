@@ -142,7 +142,7 @@
    (hint-control           (array level-hint-control))
    (task-hint-control      (array task-hint-control-group))
    (total-deaths           int32)
-   (continue-deaths        int32)
+   (continue-deaths        int32) ;; repurposing this bitch as total-bonks
    (fuel-cell-deaths       int32)
    (game-start-time        time-frame)
    (continue-time          time-frame)

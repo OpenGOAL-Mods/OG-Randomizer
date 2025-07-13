@@ -455,11 +455,17 @@
   (let* ((name (-> *rando-state* checkpoint-list idx))
          (name-up (string-upcase name (clear *checkpoint-case-txt*))))
     (cond
-      ((checkpointValid? name)
+      ((not (checkpointValid? name))
+        ;; show transparent if invalid checkpoint
+        (format (clear *checkpoint-text*) "~D. ~22L~S~S" (+ idx 1) name-up (if (= idx (-> *rando-state* next-idx)) " ~5L<" ""))
+        )
+      ((< idx (-> *rando-state* next-idx))
+        ;; checkpoint that we used
         (format (clear *checkpoint-text*) "~D. ~1L~S" (+ idx 1) name-up)
         )
       (else
-        (format (clear *checkpoint-text*) "~D. ~2L~S" (+ idx 1) name-up)
+        ;; checkpoint not yet used
+        (format (clear *checkpoint-text*) "~D. ~2L~S~S" (+ idx 1) name-up (if (= idx (-> *rando-state* next-idx)) " ~5L<" ""))
         )
       )
     *checkpoint-text*
@@ -583,7 +589,8 @@
     (if (-> *randomizer-settings* warp-on-eco-vents?) "V" "")
     (if (-> *randomizer-settings* warp-on-death?) "D" "")
     (the int (-> *randomizer-settings* collectables-needed-to-warp)))
-  (format *checkpoint-text* "SEED: ~D" (-> *randomizer-settings* current-seed))
+  (format *checkpoint-text* "SEED: ~D~%" (-> *randomizer-settings* current-seed))
+  (format *checkpoint-text* "CELLS: ~D / BONKS: ~D / DEATHS: ~D" (the int (-> *game-info* fuel)) (-> *game-info* continue-deaths) (-> *game-info* total-deaths))
   
   *checkpoint-text*
   )

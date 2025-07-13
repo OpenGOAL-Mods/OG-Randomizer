@@ -1282,7 +1282,7 @@
 
 ;; this is to avoid changing the value of *temp-options* or reallocating the options when reloading file
 (unless *temp-options-alloced*
-  (define *temp-options* (new 'static 'boxed-array :type game-option :length 200 :allocated-length 200))
+  (define *temp-options* (new 'static 'boxed-array :type game-option :length 2000 :allocated-length 2000))
   (dotimes (i (-> *temp-options* length))
     (set! (-> *temp-options* i) (new 'global 'game-option))
     (set! (-> *temp-options* i name-override) (new 'global 'string 128 (the-as string #f))))
@@ -1369,7 +1369,7 @@
 
 (defun build-checkpoint-list-options ()
   (set! (-> *temp-options* length) 0)
-  (dotimes (idx 199) ;; *rando-list-length*) ;; *temp-options* has length 200, some off by one error somewhere ig
+  (dotimes (idx (min *rando-list-length* (+ (-> *rando-state* next-idx) 5)))
     (add-checkpoint-list-option idx))
   (add-back-option))
 
@@ -3666,10 +3666,10 @@
 (defun draw-rando-stats-heading ((obj progress) (arg0 font-context))
   (set-scale! arg0 0.55)
   (set-flags! arg0 (font-flags shadow kerning middle middle-vert large))
-  (set-origin! arg0 (- -95 (-> obj left-x-offset)) 30)
-  (set-width! arg0 600)
+  (set-origin! arg0 (- -245 (-> obj left-x-offset)) 5)
+  (set-width! arg0 900)
   (set-color! arg0 (font-color progress-blue))
-  (set-height! arg0 20)
+  (set-height! arg0 50)
   (print-game-text-scaled (get-rando-stats-heading)
                           (-> obj transition-percentage-invert)
                           arg0
