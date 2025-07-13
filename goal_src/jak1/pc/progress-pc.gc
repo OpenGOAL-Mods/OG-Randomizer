@@ -2675,6 +2675,10 @@
                       ((-> options (-> obj option-index) option-disabled-func)))
             (sound-play "cursor-options")
             (return #f))
+          (when (and (!= (-> options (-> obj option-index) name) (text-id back))
+                     (or (= (-> obj display-state) (progress-screen checkpoint-list)) (= (-> obj display-state) (progress-screen spawns-by-level))))
+            ;; no selecting on these screens, except for back button
+            (return #f))
           (cond
             ((not (-> obj selected-option))
               ;; no option already selected.
