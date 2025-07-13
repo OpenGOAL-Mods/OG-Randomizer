@@ -139,7 +139,7 @@
          (set! (-> s4-3 disp1) (-> *load-state* want 1 display?))
          (set! (-> this current-continue) s4-3))))
     (when (!= s5-0 (-> this current-continue))
-      (set! (-> this continue-deaths) 0)
+      ;; (set! (-> this continue-deaths) 0) ;; repurposed for total-bonks counter
       (set-time! (-> this continue-time))))
   (-> this current-continue))
 
@@ -178,7 +178,7 @@
     (('dead)
      ;; reload game-info because we died.  Increase death counts
      (+! (-> this total-deaths) 1)
-     (+! (-> this continue-deaths) 1)
+    ;;  (+! (-> this continue-deaths) 1) ;; repurposed for total-bonks counter
      (+! (-> this fuel-cell-deaths) 1)
      (when *target*
        (let ((lev-info (-> *target* current-level info)))
@@ -331,7 +331,7 @@
     (('dead)
      ;; reload game-info because we died.  Increase death counts
      (+! (-> this total-deaths) 1)
-     (+! (-> this continue-deaths) 1)
+    ;;  (+! (-> this continue-deaths) 1) ;; repurposed for total-bonks counter
      (+! (-> this fuel-cell-deaths) 1)
      (when *target*
        (let ((lev-info (-> *target* current-level info)))

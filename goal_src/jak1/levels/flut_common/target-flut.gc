@@ -1112,6 +1112,7 @@
                  (ja-channel-set! 1)
                  (ja :group! eichar-flut-smack-surface-ja :num! min))
                (sound-play "smack-surface")
+               (+! (-> *game-info* continue-deaths) 1) ;; count total-bonks here
                (if (-> *challenges-settings* challenges-bonkless?)
                 (reset-all)
                 )
