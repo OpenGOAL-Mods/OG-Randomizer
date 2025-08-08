@@ -8,11 +8,12 @@
 (define *checkpoint-list* (the-as (array string) (new
                                              'static
                                              'boxed-array
-                                             :type string :length 77 :allocated-length 77
+                                             :type string :length 78 :allocated-length 78
   "game-start"
   "training-far"
   "village1-hut"
   "village1-warp"
+  "village1-far"
   "beach-start"
   "beach-pelican"
   "beach-far"
