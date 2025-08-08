@@ -2256,7 +2256,7 @@
   (set! (-> *options-remap* (progress-screen randomizer-warp-options))    *randomizer-warp-options*)
   (set! (-> *options-remap* (progress-screen challenges-options))         *challenges-options*)
   (set! (-> *options-remap* (progress-screen mod-options))
-    (if (task-closed? (game-task finalboss-movies) (task-status unknown))
+    (if (or *cheat-mode* (task-closed? (game-task finalboss-movies) (task-status unknown)))
       *mod-options-post-game*
       *mod-options*
       ))
